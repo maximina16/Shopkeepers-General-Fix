@@ -1,3 +1,5 @@
+# Archived:  This plugin is maintained here: https://github.com/PlayZenka/Shopkeepers-MMOItems
+
 # Shopkeepers + MMOItems
 
 This plugin is designed for stable integration of **Shopkeepers** with items from **MMOItems**.
