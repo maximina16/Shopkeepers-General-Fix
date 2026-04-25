@@ -1,13 +1,16 @@
 package de.blablubbabc.shopkeepersAPIMMOItems;
 
 import org.bukkit.Bukkit;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.blablubbabc.shopkeepersAPIMMOItems.itemUpdates.ItemUpdater;
+import de.blablubbabc.shopkeepersAPIMMOItems.infiniteFishing.InfiniteFishingListener;
 
 public class ShopkeepersAPIMMOItems extends JavaPlugin {
 
     private ItemUpdater itemUpdater;
+    private InfiniteFishingListener infiniteFishingListener;
 
 	@Override
     public void onEnable() {
@@ -29,12 +32,21 @@ public class ShopkeepersAPIMMOItems extends JavaPlugin {
             this.itemUpdater = new ItemUpdater(this);
             itemUpdater.onEnable();
         }
+
+        if (Bukkit.getPluginManager().isPluginEnabled("InfiniteFishing")) {
+            this.infiniteFishingListener = new InfiniteFishingListener();
+            Bukkit.getPluginManager().registerEvents(infiniteFishingListener, this);
+            getLogger().info("InfiniteFishing detected. InfiniteFishing support enabled.");
+        }
     }
 
 	@Override
     public void onDisable() {
         if (itemUpdater != null) {
             itemUpdater.onDisable();
+        }
+        if (infiniteFishingListener != null) {
+            HandlerList.unregisterAll(infiniteFishingListener);
         }
     }
 }
