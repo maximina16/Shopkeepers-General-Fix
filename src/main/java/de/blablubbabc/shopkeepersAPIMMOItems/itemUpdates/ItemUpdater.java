@@ -66,6 +66,11 @@ public class ItemUpdater {
         String mmoType = nbtItem.getType();
         String mmoId = nbtItem.getString("MMOITEMS_ITEM_ID");
 
+        // Remove Infinite Fishing bait tags for comparison
+        for (int i = 0; i < 10; i++) {
+            nbtItem.removeTag("bait" + i);
+        }
+
         ItemStack expectedItem = this.getExpectedItemData(currentItem);
 
         if (expectedItem != null && !currentItem.isSimilar(expectedItem)) {
